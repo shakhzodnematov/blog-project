@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock %}
+
+{% block content %}
+
+    <div>
+        <h1 class="display-4">Hello!</h1>
+        <p class="lead">Welcome to the BlogApp.</p>
+        <hr class="my-4">
+        <p>Here you will stay updated with the latest news about programming and developers.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View posts</a>
+        </p>
+    </div>
+{% endblock %}
