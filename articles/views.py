@@ -5,13 +5,9 @@ from django.urls import reverse_lazy
 from .models import Article
 
 
-class ArticleListView(LoginRequiredMixin, ListView):
+class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
-
-    def test_func(self):
-        obj = self.get_object()
-        return obj.author == self.request.user
 
 
 class ArticleDetailView(DetailView):
