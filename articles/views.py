@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from .models import Article
 
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
     template_name = 'article_list.html'
 
