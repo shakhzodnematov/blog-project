@@ -13,6 +13,14 @@
             {%  endif %}
             <div class="card-body">
                 {{ article.summary }}...<a href="{% url 'article_detail' article.pk  %}">in detail</a>
+                <br>
+                <div>
+                {% for tag in article.tags.all %}
+                    <a href="#" class="badge text-decoration-none bg-secondary">
+                    #{{tag}}
+                    </a>
+                {% endfor %}
+                </div>
             </div>
             <div class="card-footer text-left text-muted">
                 <span class="text-muted">author {{ article.author | title }} &middot; {{ article.date }}</span>

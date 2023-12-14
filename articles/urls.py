@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import ArticleListView, ArticleUpdateView, ArticleDeleteView, ArticleDetailView, ArticleCreateView
+from .views import (ArticleListView, ArticleUpdateView, ArticleDeleteView, ArticleDetailView, ArticleCreateView)
+
 
 urlpatterns = [
     path('<int:pk>/edit/', ArticleUpdateView.as_view(), name='article_edit'),

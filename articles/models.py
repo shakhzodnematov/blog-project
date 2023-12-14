@@ -4,7 +4,15 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Article(models.Model):
+    objects = None
     title = models.CharField(max_length=150)
     summary = models.CharField(max_length=200, blank=True)
     body = RichTextField()
@@ -14,6 +22,7 @@ class Article(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
     )
+    tags = models.ManyToManyField(to=Tag, related_name="posts", blank=True)
 
     class Meta:
         ordering = ['-date']
