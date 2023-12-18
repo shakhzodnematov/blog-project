@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Articles tag{{ tag.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ tag.name }}</h1>
+
+    {% for article in articles %}
+        <div class="container-fluid my-3">
+            <div class="card">
+                <div class="card-header">
+                    <span class="font-weight-bold"><a href="{% url 'article_detail' article.pk  %}"><h2>{{ article.title }}</h2></a></span>
+                </div>
+                {% if article.photo %}
+                    <img src="{{ article.photo.url }}" alt="{{ article.title }}">
+                {% endif %}
+                <div class="card-body">
+                    {{ article.summary }}...<a href="{% url 'article_detail' article.pk  %}">in detail</a>
+                    <br>
+                    <div>
+                        {% for tag in article.tags.all %}
+                            <a href="{% url 'tag_articles' tag_name=tag.name %}" class="badge text-decoration-none bg-secondary">#{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-footer text-left text-muted">
+                    <span class="text-muted">author {{ article.author | title }} &middot; {{ article.date }}</span>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No articles found for this tag.</p>
+    {% endfor %}
+{% endblock %}

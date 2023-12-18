@@ -5,6 +5,7 @@ from ckeditor.fields import RichTextField
 
 
 class Tag(models.Model):
+    objects = None
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
@@ -23,6 +24,8 @@ class Article(models.Model):
         on_delete=models.CASCADE,
     )
     tags = models.ManyToManyField(to=Tag, related_name="posts", blank=True)
+
+    views = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['-date']

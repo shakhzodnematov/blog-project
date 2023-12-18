@@ -2,6 +2,19 @@
 {% block title %}Posts{% endblock %}
 
 {% block content %}
+    <form method="GET">
+        <div class="d-flex align-items-center justify-content-between">
+            <select name="filter" class="form-select mt-3">
+                <option value="" {% if not request.GET.filter %} selected {% endif %}>All</option>
+                <option value="new" {% if request.GET.filter == "new" %} selected {% endif %}>Newest</option>
+                <option value="most_viewed" {% if request.GET.filter == 'most_viewed' %} selected {% endif %}>Most Viewed</option>
+                <option value="popular_week" {% if request.GET.filter == 'popular_week' %} selected {% endif %}>Popular This Week</option>
+                <option value="popular_month" {% if request.GET.filter == 'popular_month' %} selected {% endif %}>Popular This Month</option>
+            </select>
+            <input type="submit" class="btn btn-primary mt-3 ms-3" value="Filter">
+        </div>
+    </form>
+
     {% for article in object_list %}
     <div class="container-fluid my-3">
         <div class="card">
@@ -16,9 +29,7 @@
                 <br>
                 <div>
                 {% for tag in article.tags.all %}
-                    <a href="#" class="badge text-decoration-none bg-secondary">
-                    #{{tag}}
-                    </a>
+                    <a href="{% url 'tag_articles' tag_name=tag.name %}">#{{ tag.name }}</a>
                 {% endfor %}
                 </div>
             </div>
@@ -28,4 +39,5 @@
         </div>
     </div>
     {% endfor %}
+
 {% endblock %}
